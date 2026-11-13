@@ -4,16 +4,22 @@ This is **Milestone 1** of the Alien Invasion customization project.
 
 ## Original custom assets
 
-Running the game automatically generates original themed assets:
+The project includes the generated Milestone 1 assets in the `Assets/` folders:
 - `Assets/images/neon_ship.png` — cyan/purple spaceship
 - `Assets/images/neon_background.png` — deep-space starfield
 - `Assets/images/neon_laser.png` — glowing cyan laser
 - `Assets/sound/neon_laser.wav` — original synthesized descending laser sound
 
-The reproducible source for these files is `asset_generator.py`. All paths use `pathlib`. These generated files are created locally when the game starts; they are not yet stored as binaries in GitHub.
+The reproducible source for these files is `asset_generator.py`. All paths use `pathlib`. The generator preserves existing custom files and only creates missing assets, so manual edits are not overwritten unexpectedly.
 
 ## Installation and play
 
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe alien_invasion.py
+```
+
+If your Windows Python launcher is available on PATH, the equivalent commands are:
 ```powershell
 py -m pip install -r requirements.txt
 py alien_invasion.py

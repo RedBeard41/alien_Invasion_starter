@@ -14,12 +14,24 @@ import pygame
 ROOT = Path(__file__).resolve().parent
 IMAGES = ROOT / "Assets" / "images"
 SOUNDS = ROOT / "Assets" / "sound"
+REQUIRED_ASSETS = (
+    IMAGES / "neon_ship.png",
+    IMAGES / "neon_laser.png",
+    IMAGES / "neon_background.png",
+    SOUNDS / "neon_laser.wav",
+)
 
 
-def generate_assets():
-    """Build original neon-themed images and a synthesized laser WAV file."""
+def generate_assets(force=False):
+    """Build original neon-themed images and a synthesized laser WAV file.
+
+    Existing custom files are kept unless a regeneration is explicitly forced.
+    """
     IMAGES.mkdir(parents=True, exist_ok=True)
     SOUNDS.mkdir(parents=True, exist_ok=True)
+    if not force and all(path.exists() for path in REQUIRED_ASSETS):
+        return
+
     pygame.init()
 
     ship = pygame.Surface((100, 100), pygame.SRCALPHA)
