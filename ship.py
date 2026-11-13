@@ -1,55 +1,52 @@
-
+"""Program Name: Neon Defender Ship
+Author: Xavier Chitison
+Purpose: Draw and move the original neon ship.
+Starter Code Links: https://github.com/XavierChitison/alien_Invasion_starter
+Date Updated: 2026-11-13
+"""
 import pygame
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
-    from arsenal import ShipArsenal
 
 
-class Ship:
-    def __init__(self, game: 'AlienInvasion', arsenal: 'ShipArsenal'):
-        self.game = game
+class Ship(pygame.sprite.Sprite):
+    """Represent the player ship."""
+
+    def __init__(self, game, arsenal):
+        """Load custom ship art and position it along the screen bottom."""
+        super().__init__()
         self.settings = game.settings
         self.screen = game.screen
         self.arsenal = arsenal
         self.boundaries = self.screen.get_rect()
-
-        self.image = pygame.image.load(self.settings.ship_file)
-        self.image = pygame.transform.scale(
+        self.image = pygame.image.load(str(self.settings.ship_file)).convert_alpha()
+        self.image = pygame.transform.smoothscale(
             self.image, (self.settings.ship_width, self.settings.ship_height))
-
         self.rect = self.image.get_rect()
         self._center_ship()
         self.moving_right = False
         self.moving_left = False
-        self.arsenal = arsenal
 
     def _center_ship(self):
-        self.rect.midbottom = self.screen.get_rect().midbottom
+        """Place the ship at the bottom center."""
+        self.rect.midbottom = self.boundaries.midbottom
         self.x = float(self.rect.x)
 
     def update(self):
-        # updating the position of the ship
-        self._update_ship_movement()
-
-    def _update_ship_movement(self):
-        temp_speed = self.settings.ship_speed
-        if self.moving_right and self.rect.right < self.boundaries.right:
-            self.x += temp_speed
-        if self.moving_left and self.rect.left > self.boundaries.left:
-            self.x -= temp_speed
-
-        self.rect.x = self.x
+        """Update ship movement without leaving the screen."""
+        if self.moving_right:
+            self.x += self.settings.ship_speed
+        if self.moving_left:
+            self.x -= self.settings.ship_speed
+        self.x = max(0, min(self.x, self.boundaries.width - self.rect.width))
+        self.rect.x = round(self.x)
 
     def draw(self):
+        """Render the ship."""
         self.screen.blit(self.image, self.rect)
 
     def fire(self):
+        """Ask the arsenal to create a new laser."""
         return self.arsenal.fire_bullet()
 
     def check_collisions(self, other_group):
-        if pygame.sprite.spritecollideany(self, other_group):
-            self._center_ship()
-            return True
-        return False
+        """Reserve collision support for Milestone 2."""
+        return pygame.sprite.spritecollideany(self, other_group) is not None
