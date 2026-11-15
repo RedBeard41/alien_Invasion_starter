@@ -1,4 +1,5 @@
 import pygame
+from pathlib import Path
 from pygame.sprite import Sprite
 
 
@@ -13,8 +14,9 @@ class Ship(Sprite):
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
 
-        self.image = pygame.image.load('Assets/images/ship.png')
-        self.image = pygame.transform.scale(self.image, (90,62))
+        ship_path = Path(__file__).resolve().parent / "Assets" / "images" / "ship2(no bg).png"
+        self.image = pygame.image.load(str(ship_path)).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (90, 100))
         self.rect = self.image.get_rect()
 
         self.rect.midbottom = self.screen_rect.midbottom
