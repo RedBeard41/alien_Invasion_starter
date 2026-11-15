@@ -8,6 +8,7 @@ from time import sleep
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from pathlib import Path
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior"""
@@ -20,7 +21,14 @@ class AlienInvasion:
 
         self.screen = pygame.display.set_mode(
     (self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Alien Invasion")
+        pygame.display.set_caption("Neon Space Shooter - Track 2")
+
+        background_path = Path(__file__).resolve().parent / "Assets" / "images" / "Starbasesnow.png"
+        self.background = pygame.image.load(str(background_path)).convert()
+        self.background = pygame.transform.scale(
+            self.background,
+            (self.settings.screen_width, self.settings.screen_height)
+)
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
         self.ship = Ship(self)
@@ -211,7 +219,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
-        self.screen.fill(self.settings.bg_color)
+        self.screen.blit(self.background, (0, 0))
 
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
