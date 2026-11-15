@@ -28,7 +28,12 @@ class AlienInvasion:
         self.background = pygame.transform.scale(
             self.background,
             (self.settings.screen_width, self.settings.screen_height)
-)
+        )
+
+        laser_sound_path = Path(__file__).resolve().parent / "Assets" / "sound" / "laser.mp3"
+        self.laser_sound = pygame.mixer.Sound(str(laser_sound_path))
+        self.laser_sound.set_volume(0.3)
+
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
         self.ship = Ship(self)
@@ -175,10 +180,11 @@ class AlienInvasion:
             self.ship.moving_left = False
 
     def _fire_bullet(self):
-        """Create a new bullet and add it to the bullets group."""
+        """Create a new bullet and play the laser sound."""
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+            self.laser_sound.play()
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
