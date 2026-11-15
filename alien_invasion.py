@@ -34,25 +34,31 @@ class AlienInvasion:
         self.laser_sound = pygame.mixer.Sound(str(laser_sound_path))
         self.laser_sound.set_volume(0.3)
 
-        self.stats = GameStats(self)
-        self.sb = Scoreboard(self)
+        # Milestone 1: Disable tutorial scoring and enemy features.
+        # These will be restored in later milestones.
+        # self.stats = GameStats(self)
+        # self.sb = Scoreboard(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
-        self.aliens = pygame.sprite.Group()
-        self._create_fleet()
-        self.game_active = False
 
-        self.play_button = Button(self, "Play")
+        # self.aliens = pygame.sprite.Group()
+        # self._create_fleet()
+
+        # Milestone 1 runs immediately without a Play button.
+        self.game_active = True
+
+        # self.play_button = Button(self, "Play")
 
     def run_game(self):
-        """Start the main loop for the game."""
+        """Run the Milestone 1 player movement and shooting demo."""
         while True:
             self._check_events()
 
             if self.game_active:
                 self.ship.update()
                 self._update_bullets()
-                self._update_aliens()
+                # self._update_aliens()  # Reserved for Milestone 2.
 
             self._update_screen()
             self.clock.tick(60)
@@ -65,7 +71,7 @@ class AlienInvasion:
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
 
-        self._check_bullet_alien_collisions()
+        # self._check_bullet_alien_collisions()  # Reserved for Milestone 2.
 
     def _check_bullet_alien_collisions(self):
         """Respond to bullet-alien collisions."""
@@ -137,9 +143,10 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = pygame.mouse.get_pos()
-                self._check_play_button(mouse_pos)
+            # Milestone 1: Play button disabled.
+            # elif event.type == pygame.MOUSEBUTTONDOWN:
+            #     mouse_pos = pygame.mouse.get_pos()
+            #     self._check_play_button(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
         """Start a new game when the player clicks Play."""
@@ -231,12 +238,12 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.ship.blitme()
-        self.aliens.draw(self.screen)
+        # Milestone 1: Hide features reserved for later milestones.
+        # self.aliens.draw(self.screen)
+        # self.sb.show_score()
 
-        self.sb.show_score()
-
-        if not self.game_active:
-            self.play_button.draw_button()
+        # if not self.game_active:
+        #     self.play_button.draw_button()
        
         pygame.display.flip()
 
