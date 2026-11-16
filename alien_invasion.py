@@ -1,3 +1,12 @@
+"""
+Program Name: Neon Space Shooter - Track 2
+Author: Colin Lee
+Purpose: Run the game, manage player controls, and display
+the custom spaceship, galaxy background, and laser effects.
+Starter Code Links: https://github.com/RedBeard41/alien_invasion_starter
+Project Repository: https://github.com/clee0106/alien_Invasion_starter/tree/track_2_assets
+Date Updated: November 15, 2026
+"""
 import sys
 import pygame
 from settings import Settings

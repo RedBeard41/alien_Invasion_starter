@@ -1,5 +1,15 @@
+"""
+Program Name: Neon Space Shooter - Track 2
+Author: Colin Lee
+Purpose: Store the game's settings, including screen dimensions,
+ship movement speed, and laser properties.
+Starter Code Links: https://github.com/RedBeard41/alien_invasion_starter
+Project Repository: https://github.com/clee0106/alien_Invasion_starter/tree/track_2_assets
+Date Updated: November 15, 2026
+"""
+
 class Settings:
-    """A class to store all settings for Alien Invasion."""
+    """A class to store all settings for Neon Space Shooter."""
 
     def __init__(self):
         """Initialize the game's settings."""
