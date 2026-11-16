@@ -12,7 +12,6 @@ For Milestone 1, I customized the following:
 - **Lasers:** Replaced the default bullets with red laser graphics.
 - **Sound:** Added a laser firing sound effect.
 - **Game Title:** Changed the window caption to "Neon Space Shooter - Track 2".
-
 The alien fleet, scoring system, and Play button are temporarily disabled for this milestone.
 
 ## Controls
@@ -26,4 +25,4 @@ The alien fleet, scoring system, and Play button are temporarily disabled for th
 2. Run `python alien_invasion.py`.
 
 ## Milestone 1 Demo
-Milestone_1_Demo: YouTube link will be added after recording.
+Milestone_1_Demo: https://youtu.be/W6UTk8CIAZs
